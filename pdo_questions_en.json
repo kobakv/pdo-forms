@@ -1,0 +1,480 @@
+{
+  "1": {
+    "name": "Well-being",
+    "answers": [
+      "I almost always feel unwell.",
+      "I always feel cheerful and full of energy.",
+      "Periods of good well-being alternate with periods when I feel unwell.",
+      "My well-being often changes - sometimes several times a day.",
+      "I almost always have something aching.",
+      "Feeling unwell appears in me after upsets and anxieties.",
+      "Feeling unwell appears in me from worrying and expecting unpleasantness.",
+      "I easily tolerate pain and physical suffering.",
+      "My well-being is quite satisfactory.",
+      "I have periods of poor well-being with irritability and sadness.",
+      "My well-being greatly depends on how people around me treat me.",
+      "I tolerate pain and physical suffering very poorly.",
+      "None of these statements apply to me."
+    ]
+  },
+  "2": {
+    "name": "Mood",
+    "answers": [
+      "I usually have a very good mood.",
+      "My mood easily changes due to minor reasons.",
+      "My mood worsens when I expect possible unpleasantness, worry about loved ones.",
+      "My mood strongly depends on who I am with.",
+      "I almost always have a bad mood.",
+      "My mood depends on poor well-being.",
+      "My mood improves when I am left alone.",
+      "I have periods of gloomy irritability when I bother those around me.",
+      "I do not experience sadness and sorrow, but I can be angry and furious.",
+      "Even minor unpleasantness greatly upsets me.",
+      "Periods of very good mood alternate with periods of bad mood.",
+      "My mood is usually the same as those around me.",
+      "None of these statements apply to me."
+    ]
+  },
+  "3": {
+    "name": "Sleep and dreams",
+    "answers": [
+      "I sleep well and do not pay attention to dreams.",
+      "My sleep is rich with vivid dreams.",
+      "Before falling asleep, I like to daydream.",
+      "I sleep poorly and feel sleepy during the day.",
+      "My sleep is very sound, but sometimes I have nightmares.",
+      "I sleep little, but wake up refreshed. I rarely see dreams.",
+      "My sleep is poor and restless, often with tormenting and sad dreams.",
+      "Insomnia occurs in me periodically without special reasons.",
+      "I cannot sleep peacefully if I need to wake up at a certain time in the morning.",
+      "If something upsets me, I cannot fall asleep for a long time.",
+      "I often have various dreams - some joyful, some unpleasant.",
+      "I have periods of fear at night.",
+      "I often dream that I am being insulted.",
+      "I can freely regulate my sleep.",
+      "None of these statements apply to me."
+    ]
+  },
+  "4": {
+    "name": "Waking up from sleep",
+    "answers": [
+      "It is difficult for me to wake up at a set time.",
+      "I wake up with an unpleasant thought that I need to go to work or study.",
+      "Waking up is associated with unpleasant sensations.",
+      "I wake up with difficulty and feel drowsy.",
+      "I wake up easily but with irritability.",
+      "I wake up easily and feel refreshed.",
+      "My awakening is not difficult, but I often have anxious thoughts.",
+      "I often wake up with fear or anxiety.",
+      "After waking, I often feel sadness for some time.",
+      "I wake up with irritability that passes after a short time.",
+      "When I wake, I usually feel normal.",
+      "I can control my awakening.",
+      "None of these statements apply to me.",
+      "I wake up with a longing feeling."
+    ]
+  },
+  "5": {
+    "name": "Appetite and attitude to food",
+    "answers": [
+      "I am always hungry and eat with appetite.",
+      "My appetite is variable - sometimes good, sometimes poor.",
+      "My appetite is often poor, I need encouragement to eat.",
+      "I eat little and am often satiated quickly.",
+      "I eat slowly, carefully selecting food.",
+      "My appetite worsens when upset or anxious.",
+      "My appetite improves during periods of good mood.",
+      "I often overeat.",
+      "I like to eat alone.",
+      "I like tasty and refined food.",
+      "Food is of little interest to me.",
+      "I often think about food.",
+      "I am often thirsty.",
+      "My appetite does not change much.",
+      "I have restrictions in food due to allergies or health.",
+      "Food means a lot to me.",
+      "I often have nausea or heartburn.",
+      "My appetite depends on who I eat with.",
+      "I am very picky about food.",
+      "None of these statements apply to me."
+    ]
+  },
+  "6": {
+    "name": "Attitude to alcoholic beverages",
+    "answers": [
+      "I easily get intoxicated and become cheerful.",
+      "Alcohol gives me energy and courage.",
+      "I can drink moderately.",
+      "Alcohol makes me sad and melancholic.",
+      "I do not like alcohol.",
+      "Alcohol worsens my well-being.",
+      "Alcohol makes me lose control.",
+      "I become aggressive when drunk.",
+      "I enjoy the feeling of slight intoxication.",
+      "Alcohol gives me calmness.",
+      "I avoid alcohol.",
+      "When drunk, I become withdrawn and quiet.",
+      "Alcohol has little effect on me.",
+      "I like to drink in company."
+    ]
+  },
+  "7": {
+    "name": "Sexual problems",
+    "answers": [
+      "I have little or no interest in sexual matters.",
+      "I am interested in sex but it causes anxiety.",
+      "Sexual interests occupy much of my thoughts.",
+      "I have difficulties in sexual relations.",
+      "Sex is natural and does not cause special emotions.",
+      "I am easily aroused.",
+      "Sexual experiences seem strange and unnatural to me.",
+      "I feel shame regarding sexual matters.",
+      "I am fascinated by unusual sexual things.",
+      "I prefer solitude in sexual matters.",
+      "Sexual relations should be bound by rules.",
+      "I have frequent sexual fantasies.",
+      "Sexual interests vary depending on my mood.",
+      "I am indifferent to sexual matters.",
+      "None of these statements apply to me."
+    ]
+  },
+  "8": {
+    "name": "Attitude to clothing",
+    "answers": [
+      "Clothing is very important to me.",
+      "I pay attention to how I dress.",
+      "I am careful about my appearance.",
+      "I like fashionable and expensive clothes.",
+      "Clothing should be comfortable.",
+      "I prefer bright and noticeable clothes.",
+      "I like simple and modest clothing.",
+      "My clothing depends on my mood.",
+      "I care little about what I wear.",
+      "Quality of clothing is important to me.",
+      "I like to look attractive.",
+      "Clothing reflects my personality.",
+      "None of these statements apply to me."
+    ]
+  },
+  "9": {
+    "name": "Attitude to money",
+    "answers": [
+      "Money interests me little.",
+      "I spend money carefully.",
+      "I often lack money for what I want.",
+      "I like to have money.",
+      "Money gives me sense of security.",
+      "I want to be rich.",
+      "Money is of little importance to me.",
+      "I am careless with money.",
+      "I save money carefully.",
+      "I like to spend money on myself.",
+      "Money worries me.",
+      "I like to help others with money.",
+      "None of these statements apply to me."
+    ]
+  },
+  "10": {
+    "name": "Attitude to parents",
+    "answers": [
+      "I respect my parents.",
+      "My parents are often unfair to me.",
+      "I feel very close to my parents.",
+      "My parents are overly strict.",
+      "I am grateful to my parents.",
+      "My parents often criticize me.",
+      "I often quarrel with my parents.",
+      "My parents love me.",
+      "I am ashamed of my parents.",
+      "My parents understand me well.",
+      "I often feel guilty toward my parents.",
+      "My parents encourage my independence.",
+      "I feel distant from my parents.",
+      "None of these statements apply to me."
+    ]
+  },
+  "11": {
+    "name": "Attitude to friends",
+    "answers": [
+      "I have many friends.",
+      "I prefer a few close friends.",
+      "I am loyal to my friends.",
+      "Friends are very important to me.",
+      "I am careful in choosing friends.",
+      "I easily make new friends.",
+      "I often feel lonely despite having friends.",
+      "I am somewhat suspicious of friends.",
+      "Friends can hurt me deeply.",
+      "I enjoy spending time with friends.",
+      "I am a good friend.",
+      "I have difficulty maintaining friendships.",
+      "Friendship means a lot to me.",
+      "I prefer to be alone.",
+      "Friends come and go.",
+      "None of these statements apply to me."
+    ]
+  },
+  "12": {
+    "name": "Attitude to others",
+    "answers": [
+      "I like most people.",
+      "People seem strange to me.",
+      "I trust people easily.",
+      "Most people are good.",
+      "I am cautious with people.",
+      "People often disappoint me.",
+      "I prefer to avoid people.",
+      "People fascinate me.",
+      "I find people superficial.",
+      "I am comfortable around people.",
+      "Others often bother me.",
+      "I am friendly with most people.",
+      "I feel superior to most people.",
+      "Others often offend me.",
+      "I am indifferent to others.",
+      "I like to observe people.",
+      "People often misunderstand me.",
+      "None of these statements apply to me."
+    ]
+  },
+  "13": {
+    "name": "Attitude to strangers",
+    "answers": [
+      "I am confident with strangers.",
+      "Strangers make me nervous.",
+      "I am interested in strangers.",
+      "I am cautious with strangers.",
+      "I can easily talk to strangers.",
+      "Strangers seem threatening to me.",
+      "I prefer not to interact with strangers.",
+      "Strangers fascinate me.",
+      "I feel awkward with strangers.",
+      "I can adapt to any group of strangers.",
+      "Strangers often bother me.",
+      "I am indifferent to strangers.",
+      "None of these statements apply to me."
+    ]
+  },
+  "14": {
+    "name": "Attitude to loneliness",
+    "answers": [
+      "I enjoy being alone.",
+      "Loneliness disturbs me.",
+      "I prefer solitude to company.",
+      "Loneliness makes me anxious.",
+      "I can be alone without difficulty.",
+      "I feel sad when alone.",
+      "Solitude helps me think.",
+      "I fear being alone.",
+      "Loneliness makes me realize many things.",
+      "Being alone refreshes me.",
+      "Loneliness is painful for me.",
+      "None of these statements apply to me."
+    ]
+  },
+  "15": {
+    "name": "Attitude to the future",
+    "answers": [
+      "I am optimistic about the future.",
+      "The future concerns me.",
+      "I believe good things await me.",
+      "I am uncertain about the future.",
+      "I plan for the future carefully.",
+      "The future seems uncertain.",
+      "I am pessimistic about the future.",
+      "I rarely think about the future.",
+      "I feel excited about the future.",
+      "The future frightens me.",
+      "I am indifferent to the future.",
+      "None of these statements apply to me.",
+      "I worry about the future.",
+      "The future holds promise for me."
+    ]
+  },
+  "16": {
+    "name": "Attitude to novelty",
+    "answers": [
+      "I enjoy new experiences.",
+      "I prefer familiar things.",
+      "New situations make me anxious.",
+      "I am curious about new things.",
+      "Change is difficult for me.",
+      "I easily adapt to new situations.",
+      "New things excite me.",
+      "I am cautious with novelty.",
+      "I fear change.",
+      "I welcome new opportunities.",
+      "None of these statements apply to me."
+    ]
+  },
+  "17": {
+    "name": "Attitude to failures",
+    "answers": [
+      "Failures make me determined.",
+      "Failures deeply upset me.",
+      "I learn from failures.",
+      "Failures make me doubt myself.",
+      "I can overcome failures easily.",
+      "Failures discourage me.",
+      "I am ashamed of failures.",
+      "Failures are natural.",
+      "I blame myself for failures.",
+      "Failures do not stop me.",
+      "I am devastated by failures.",
+      "Failures help me grow.",
+      "None of these statements apply to me.",
+      "Failures make me angry."
+    ]
+  },
+  "18": {
+    "name": "Attitude to adventures and risk",
+    "answers": [
+      "I enjoy adventure.",
+      "I prefer safety.",
+      "Risk excites me.",
+      "I am cautious.",
+      "I seek thrilling experiences.",
+      "Danger frightens me.",
+      "I am adventurous.",
+      "I avoid risky situations.",
+      "I enjoy testing my limits.",
+      "I prefer predictability.",
+      "None of these statements apply to me."
+    ]
+  },
+  "19": {
+    "name": "Attitude to leadership",
+    "answers": [
+      "I naturally take charge.",
+      "I prefer not to lead.",
+      "People look to me for leadership.",
+      "I am uncomfortable being in charge.",
+      "Leadership comes naturally to me.",
+      "I lack confidence to lead.",
+      "I enjoy being responsible.",
+      "Leadership causes me stress.",
+      "I make good decisions.",
+      "I am hesitant to take charge.",
+      "I inspire others.",
+      "Leadership frightens me.",
+      "None of these statements apply to me."
+    ]
+  },
+  "20": {
+    "name": "Attitude to criticism and objections",
+    "answers": [
+      "Criticism hurts me deeply.",
+      "I react defensively to criticism.",
+      "I can accept constructive criticism.",
+      "Criticism makes me angry.",
+      "I learn from criticism.",
+      "Criticism discourages me.",
+      "I am sensitive to criticism.",
+      "I ignore criticism.",
+      "Criticism motivates me.",
+      "I take criticism personally.",
+      "I can be objective about criticism.",
+      "Objections upset me greatly.",
+      "None of these statements apply to me.",
+      "I respond well to feedback."
+    ]
+  },
+  "21": {
+    "name": "Attitude to care and instructions",
+    "answers": [
+      "I appreciate care and guidance.",
+      "I resent being told what to do.",
+      "I need guidance from others.",
+      "I value independence.",
+      "I feel safe with clear instructions.",
+      "Restrictions bother me.",
+      "I respect authority.",
+      "I rebel against instructions.",
+      "I like being cared for.",
+      "I prefer to figure things out myself.",
+      "Instructions should be clear.",
+      "Care makes me feel weak.",
+      "Guidance helps me succeed.",
+      "I resent dependence.",
+      "None of these statements apply to me."
+    ]
+  },
+  "22": {
+    "name": "Attitude to rules and laws",
+    "answers": [
+      "Rules are necessary.",
+      "Rules are too restrictive.",
+      "I follow rules carefully.",
+      "I often break rules.",
+      "Rules protect us.",
+      "Rules limit freedom.",
+      "I respect authority.",
+      "I question authority.",
+      "Rules should be followed.",
+      "Rules are made to be broken.",
+      "I understand the need for rules.",
+      "Rules frustrate me.",
+      "I am lawabiding.",
+      "None of these statements apply to me."
+    ]
+  },
+  "23": {
+    "name": "Assessment of oneself in childhood",
+    "answers": [
+      "I was a happy child.",
+      "My childhood was difficult.",
+      "I felt loved as a child.",
+      "I was often lonely as a child.",
+      "I was an obedient child.",
+      "I was a mischievous child.",
+      "I had few friends.",
+      "My parents were supportive.",
+      "School was difficult for me.",
+      "I was popular among children.",
+      "I felt different from other children.",
+      "My childhood was carefree.",
+      "I had behavior problems.",
+      "I was shy as a child.",
+      "I was anxious as a child.",
+      "None of these statements apply to me."
+    ]
+  },
+  "24": {
+    "name": "Attitude to school",
+    "answers": [
+      "I enjoyed school.",
+      "School was difficult for me.",
+      "I was a good student.",
+      "I struggled with academics.",
+      "I had many friends at school.",
+      "I was often alone at school.",
+      "Teachers liked me.",
+      "Teachers were critical of me.",
+      "School was boring.",
+      "I was anxious at school.",
+      "I felt safe at school.",
+      "I was bullied at school.",
+      "School was enjoyable.",
+      "None of these statements apply to me."
+    ]
+  },
+  "25": {
+    "name": "Assessment of oneself now",
+    "answers": [
+      "I am satisfied with myself.",
+      "I am dissatisfied with myself.",
+      "I believe in my abilities.",
+      "I doubt my abilities.",
+      "I have many strengths.",
+      "I focus on my weaknesses.",
+      "I am confident.",
+      "I lack confidence.",
+      "I am proud of myself.",
+      "I am ashamed of myself.",
+      "I am worth respecting.",
+      "I feel inferior.",
+      "I am a good person.",
+      "None of these statements apply to me."
+    ]
+  }
+}
