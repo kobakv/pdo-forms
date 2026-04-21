@@ -409,9 +409,24 @@ function calculateResults(formData) {
 }
 
 function formatResults(name, email, dob, results) {
-    const sortedEgos = Object.entries(results)
-        .sort((a, b) => b[1] - a[1])
-        .map(([ego, score]) => `${ego}: ${score} балів (${egoStates[ego].name})`);
+    const sorted = Object.entries(results).sort((a, b) => b[1] - a[1]);
+
+    const scoreLines = sorted
+        .map(([ego, score]) => `  ${ego}: ${score} б. — ${egoStates[ego].name}`)
+        .join('\n');
+
+    const interpretLines = sorted
+        .map(([ego, score]) => `▸ ${interpretScore(egoStates[ego].name, score)}`)
+        .join('\n\n');
+
+    const dominant = sorted[0];
+    const weak = sorted.filter(([, s]) => s <= 7).map(([e]) => egoStates[e].name);
+
+    const summaryParts = [];
+    summaryParts.push(`Провідна роль: ${egoStates[dominant[0]].name} (${dominant[1]} б.)`);
+    if (weak.length > 0) {
+        summaryParts.push(`Слабо розвинуті: ${weak.join(', ')}`);
+    }
 
     return `РЕЗУЛЬТАТИ ТЕСТУ "ОСОБИСТА ЕГОГРАМА"
 
@@ -420,18 +435,31 @@ Email: ${email}
 Дата народження: ${dob}
 Дата виконання: ${new Date().toLocaleDateString('uk-UA')}
 
-РОЗПОДІЛ БАЛІВ:
-${sortedEgos.join('\n')}
+────────────────────────────
+РОЗПОДІЛ БАЛІВ (від найвищого до найнижчого):
+${scoreLines}
+────────────────────────────
 
 ІНТЕРПРЕТАЦІЯ:
-- КР (Критикуючий Батько): авторитет, контроль, дисципліна, критика
-- АД (Адаптивна Дитина): послух, адаптація, залежність від думки інших
-- ЗР (Турботливий Батько): опіка, турбота, емпатія, підтримка
-- В (Дорослий): рацональність, логіка, об'єктивність, планування
-- ВД (Вільна Дитина): креативність, спонтанність, радість, імпульсивність
 
-Збалансована егограма має приблизно однакові рівні всіх п'яти ролей.
-Мінімальна оцінка: 0 балів (жодного з тверджень), максимальна: 18 балів (всім твердженням цілком притаманні).`;
+${interpretLines}
+
+────────────────────────────
+ПІДСУМОК:
+${summaryParts.join('\n')}
+
+Збалансована егограма — коли жоден стан не домінує повністю, і людина може гнучко переключатись між ролями залежно від ситуації.`;
+}
+
+// fix: interpretScore argument order
+function interpretScore(name, score) {
+    if (score <= 7) {
+        return `${name} (${score} б.) — его-стан слабо розвинутий. Ця роль майже не проявляється у твоїй поведінці та стосунках.`;
+    } else if (score <= 12) {
+        return `${name} (${score} б.) — его-стан добре розвинутий. Ця роль присутня і є частиною твого арсеналу в різних ситуаціях.`;
+    } else {
+        return `${name} (${score} б.) — его-стан домінує. Є схильність "залипати" в цій ролі — вона автоматично вмикається в стосунках, навіть коли це не допомагає.`;
+    }
 }
 
 document.getElementById('egogramma-form').addEventListener('submit', function(e) {
