@@ -339,6 +339,15 @@
                         <label for="name">ПІБ (Ім'я Прізвище По-батькові) *</label>
                         <input type="text" id="name" name="name" required placeholder="Приклад: Іван Петренко Миколайович">
                     </div>
+                    <div class="form-group" style="margin-top:16px;">
+                        <label style="display:block;margin-bottom:8px;">Стать *</label>
+                        <label style="margin-right:24px;cursor:pointer;">
+                            <input type="radio" name="gender" value="male" checked> Чоловік
+                        </label>
+                        <label style="cursor:pointer;">
+                            <input type="radio" name="gender" value="female"> Жінка
+                        </label>
+                    </div>
                 </div>
 
                 <div class="error" id="error-message"></div>
@@ -476,6 +485,15 @@
             submitForm();
         });
 
+        function buildPipeFormat(research) {
+            const parts = [];
+            for (let t = 1; t <= 25; t++) {
+                const checked = document.querySelectorAll(`input[name="${research}-theme${t}"]:checked`);
+                parts.push(checked.length > 0 ? Array.from(checked).map(cb => cb.value).join(',') : '');
+            }
+            return parts.join('|');
+        }
+
         function submitForm() {
             const name = document.getElementById('name').value.trim();
             if (!name) {
@@ -483,50 +501,20 @@
                 return;
             }
 
-            const research1 = {};
-            const research2 = {};
+            const gender = document.querySelector('input[name="gender"]:checked').value;
+            const d1 = buildPipeFormat('research-1');
+            const d2 = buildPipeFormat('research-2');
 
-            // Collect Research 1
-            for (let themeNum = 1; themeNum <= 25; themeNum++) {
-                const checkboxes = document.querySelectorAll(`input[name="research-1-theme${themeNum}"]:checked`);
-                if (checkboxes.length > 0) {
-                    research1[themeNum] = Array.from(checkboxes).map(cb => cb.value);
-                }
-            }
+            const output =
+`Ім'я: ${name}
+Стать: ${gender === 'male' ? 'male' : 'female'}
 
-            // Collect Research 2
-            for (let themeNum = 1; themeNum <= 25; themeNum++) {
-                const checkboxes = document.querySelectorAll(`input[name="research-2-theme${themeNum}"]:checked`);
-                if (checkboxes.length > 0) {
-                    research2[themeNum] = Array.from(checkboxes).map(cb => cb.value);
-                }
-            }
+Д1: ${d1}
+Д2: ${d2}`;
 
-            // Format output
-            let output = `Клієнт: ${name}\n\n`;
-            output += `=== ДОСЛІДЖЕННЯ 1 (Найбільш притаманні) ===\n`;
-            for (let i = 1; i <= 25; i++) {
-                if (research1[i]) {
-                    const themeName = questionsData[i].name;
-                    output += `Тема ${i}. ${themeName}: ${research1[i].join(', ')}\n`;
-                }
-            }
-
-            output += `\n=== ДОСЛІДЖЕННЯ 2 (Найменш притаманні) ===\n`;
-            for (let i = 1; i <= 25; i++) {
-                if (research2[i]) {
-                    const themeName = questionsData[i].name;
-                    output += `Тема ${i}. ${themeName}: ${research2[i].join(', ')}\n`;
-                }
-            }
-
-            // Show result
             const resultDiv = document.getElementById('result');
             resultDiv.textContent = output;
             resultDiv.classList.add('show');
-
-            // Log to console
-            console.log('Дані для обробки:', { name, research1, research2 });
         }
     </script>
 </body>

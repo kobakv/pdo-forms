@@ -8,10 +8,23 @@ class PDOReportGenerator:
         self.gender = gender
         self.calc = PDOCalculator(gender)
 
+    @staticmethod
+    def _parse_answers(s: str):
+        """Підтримує старий формат (25 чисел через кому) і новий (групи через |)."""
+        s = s.strip()
+        if ':' in s:
+            s = s.split(':', 1)[1].strip()
+        if '|' in s:
+            result = []
+            for group in s.split('|'):
+                group = group.strip()
+                result.append([int(x) for x in group.split(',') if x.strip()] if group else [])
+            return result
+        return [int(x.strip()) for x in s.split(',') if x.strip()]
+
     def generate(self, ans1_str: str, ans2_str: str):
-        # Парсинг вхідних рядків
-        ans1 = [int(x.strip()) for x in ans1_str.split(',') if x.strip()]
-        ans2 = [int(x.strip()) for x in ans2_str.split(',') if x.strip()]
+        ans1 = self._parse_answers(ans1_str)
+        ans2 = self._parse_answers(ans2_str)
 
         # Розрахунок
         self.calc.calculate(ans1, ans2)

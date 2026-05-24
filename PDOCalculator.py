@@ -9,36 +9,41 @@ class PDOCalculator:
         self.v_sum = 0
         self.errors = 0
 
-    def calculate(self, first_answers: list[int], second_answers: list[int]):
+    def calculate(self, first_answers, second_answers):
         """
-        Розрахунок результатів ПДО.
-        first_answers: список номерів відповідей для 1-го дослідження (25 тем).
-        second_answers: список номерів відповідей для 2-го дослідження (25 тем).
+        first_answers / second_answers: list[int] або list[list[int]] (до 3 відповідей на тему).
         """
         self.scores.clear()
         self.v_sum = 0
         self.errors = 0
 
-        # Етап 1 & 2: Розкодування та підрахунок
+        def to_lists(answers):
+            result = []
+            for a in answers:
+                if isinstance(a, (list, tuple)):
+                    result.append([x for x in a if x])
+                else:
+                    result.append([a] if a else [])
+            return result
+
+        first = to_lists(first_answers)
+        second = to_lists(second_answers)
+
         for i in range(len(TOPICS)):
-            ans1 = first_answers[i] if i < len(first_answers) else None
-            ans2 = second_answers[i] if i < len(second_answers) else None
+            ans1_list = first[i] if i < len(first) else []
+            ans2_list = second[i] if i < len(second) else []
 
-            # Перевірка на помилки (однакова відповідь в обох дослідженнях)
-            if ans1 is not None and ans1 == ans2 and ans1 != 0:
-                self.errors += 1
+            # Помилка: та сама відповідь в обох дослідженнях
+            for a in ans1_list:
+                if a in ans2_list:
+                    self.errors += 1
 
-            # Обробка 1-го дослідження
-            if ans1 is not None:
-                self._process_answer(i, 'first', ans1)
-            
-            # Обробка 2-го дослідження
-            if ans2 is not None:
-                self._process_answer(i, 'second', ans2)
+            for a in ans1_list:
+                self._process_answer(i, 'first', a)
+            for a in ans2_list:
+                self._process_answer(i, 'second', a)
 
-        # Етап 3: Застосування бонусних правил
         self._apply_bonuses()
-
         return dict(self.scores), self.v_sum, self.errors
 
     def _process_answer(self, topic_idx, research, ans_num):
