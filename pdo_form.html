@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ПДО Тест | Діагностичний опитувальник</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --stone: #E9E8E4;
+            --deep-forest: #1A241D;
+            --copper: #965935;
+            --sage: #737E77;
+            --shadow-color: rgba(26, 36, 29, 0.15);
+            --inset-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--stone) 0%, #f5f3f0 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--deep-forest);
+        }
+
+        /* SVG Grain Texture */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' result='noise' /%3E%3C/filter%3E%3Crect width='400' height='400' fill='%23000' opacity='0.02' filter='url(%23noise)' /%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px var(--shadow-color);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--stone) 0%, #faf8f5 100%);
+            border-bottom: 1px solid rgba(26, 36, 29, 0.1);
+            padding: 50px 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--deep-forest);
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        header p {
+            font-size: 15px;
+            color: var(--sage);
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .content {
+            padding: 50px 40px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--deep-forest);
+            margin-bottom: 10px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--copper);
+        }
+
+        .section-subtitle {
+            color: var(--sage);
+            font-size: 14px;
+            margin-top: 8px;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--deep-forest);
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid rgba(26, 36, 29, 0.12);
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            color: var(--deep-forest);
+            background: rgba(233, 232, 228, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--copper);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(150, 89, 53, 0.1);
+        }
+
+        .theme {
+            background: linear-gradient(135deg, rgba(233, 232, 228, 0.5) 0%, rgba(115, 126, 119, 0.03) 100%);
+            padding: 24px;
+            margin-bottom: 24px;
+            border-radius: 12px;
+            border-left: 4px solid var(--copper);
+            box-shadow: var(--inset-shadow);
+        }
+
+        .theme-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--deep-forest);
+            margin-bottom: 12px;
+        }
+
+        .theme-instruction {
+            font-size: 13px;
+            color: var(--sage);
+            margin-bottom: 16px;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 8px;
+            border-radius: 6px;
+            transition: background 0.2s ease;
+        }
+
+        .option:hover {
+            background: rgba(233, 232, 228, 0.6);
+        }
+
+        .option input[type="checkbox"] {
+            margin-top: 5px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--copper);
+            flex-shrink: 0;
+        }
+
+        .option label {
+            margin: 0;
+            font-weight: 400;
+            cursor: pointer;
+            color: var(--deep-forest);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .option input:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .option input:disabled ~ label {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .selected-count {
+            font-size: 12px;
+            color: var(--sage);
+            margin-top: 12px;
+            font-weight: 600;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 45px;
+        }
+
+        button {
+            padding: 16px 40px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .btn-submit {
+            background: var(--copper);
+            color: white;
+            flex: 1;
+            box-shadow: 0 4px 15px rgba(150, 89, 53, 0.2);
+        }
+
+        .btn-submit:hover {
+            background: #8B4D2E;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(150, 89, 53, 0.3);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .btn-reset {
+            background: var(--stone);
+            color: var(--deep-forest);
+            flex: 1;
+            border: 1px solid rgba(26, 36, 29, 0.15);
+        }
+
+        .btn-reset:hover {
+            background: #F5F3F0;
+            border-color: rgba(26, 36, 29, 0.25);
+        }
+
+        .result {
+            display: none;
+            background: linear-gradient(135deg, rgba(233, 232, 228, 0.6) 0%, rgba(115, 126, 119, 0.05) 100%);
+            border: 1px solid var(--copper);
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 30px;
+            font-family: 'Inter', monospace;
+            white-space: pre-wrap;
+            word-break: break-all;
+            font-size: 13px;
+            max-height: 500px;
+            overflow-y: auto;
+            color: var(--deep-forest);
+            box-shadow: var(--inset-shadow);
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        .error {
+            background: rgba(150, 89, 53, 0.1);
+            color: var(--copper);
+            padding: 16px;
+            border-left: 4px solid var(--copper);
+            border-radius: 6px;
+            margin-bottom: 20px;
+            display: none;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .error.show {
+            display: block;
+        }
+
+        /* Scrollbar styling */
+        .result::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .result::-webkit-scrollbar-track {
+            background: rgba(233, 232, 228, 0.5);
+            border-radius: 4px;
+        }
+
+        .result::-webkit-scrollbar-thumb {
+            background: var(--copper);
+            border-radius: 4px;
+        }
+
+        .result::-webkit-scrollbar-thumb:hover {
+            background: #8B4D2E;
+        }
+
+        /* Selection styling */
+        ::selection {
+            background: var(--copper);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Діагностичний опитувальник</h1>
+            <p>ПДО — Патохарактерологічний Діагностичний Опитувальник<br>Віталій Кобак | Гештальт-практика</p>
+        </header>
+        <div class="content">
+            <form id="pdo-form">
+                <!-- Personal Info -->
+                <div class="section">
+                    <h2 class="section-title">Особисті дані</h2>
+                    <div class="form-group">
+                        <label for="name">ПІБ (Ім'я Прізвище По-батькові) *</label>
+                        <input type="text" id="name" name="name" required placeholder="Приклад: Іван Петренко Миколайович">
+                    </div>
+                </div>
+
+                <div class="error" id="error-message"></div>
+
+                <!-- Research 1 -->
+                <div class="section" id="research-1">
+                    <h2 class="section-title">Дослідження 1</h2>
+                    <p class="section-subtitle">Найбільш притаманні характеристики</p>
+                    <p style="color: var(--sage); margin-bottom: 25px; font-size: 14px;">
+                        Виберіть <strong>не більше трьох</strong> варіантів, які найбільше Вам притаманні для кожної теми.
+                    </p>
+                    <div id="themes-1"></div>
+                </div>
+
+                <!-- Research 2 -->
+                <div class="section" id="research-2">
+                    <h2 class="section-title">Дослідження 2</h2>
+                    <p class="section-subtitle">Найменш притаманні характеристики</p>
+                    <p style="color: var(--sage); margin-bottom: 25px; font-size: 14px;">
+                        Виберіть <strong>не більше трьох</strong> варіантів, які найменше Вам притаманні для кожної теми.
+                    </p>
+                    <div id="themes-2"></div>
+                </div>
+
+                <div class="button-group">
+                    <button type="reset" class="btn-reset">Очистити</button>
+                    <button type="submit" class="btn-submit">Надіслати результати</button>
+                </div>
+
+                <div class="result" id="result"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let questionsData = {};
+
+        // Load questions
+        fetch('pdo_questions.json')
+            .then(r => r.json())
+            .then(data => {
+                questionsData = data;
+                renderForm();
+            })
+            .catch(e => {
+                document.getElementById('error-message').textContent = 'Помилка завантаження питань: ' + e;
+                document.getElementById('error-message').classList.add('show');
+            });
+
+        function renderForm() {
+            const research1 = document.getElementById('themes-1');
+            const research2 = document.getElementById('themes-2');
+
+            for (let themeNum = 1; themeNum <= 25; themeNum++) {
+                const theme = questionsData[themeNum];
+                if (!theme) continue;
+
+                const themeHtml = createThemeHtml(themeNum, theme, 'research-1');
+                research1.innerHTML += themeHtml;
+
+                const themeHtml2 = createThemeHtml(themeNum, theme, 'research-2');
+                research2.innerHTML += themeHtml2;
+            }
+
+            // Add change listeners
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', handleCheckboxChange);
+            });
+        }
+
+        function createThemeHtml(themeNum, theme, research) {
+            let html = `<div class="theme">
+                <div class="theme-title">Тема ${themeNum}. ${theme.name}</div>
+                <div class="theme-instruction">${research === 'research-1' ? 'Обирайте варіанти, які найбільше Вам притаманні' : 'Обирайте варіанти, які найменше Вам притаманні'}</div>
+                <div class="options">`;
+
+            theme.answers.forEach((answer, idx) => {
+                const answerNum = idx + 1;
+                const checkboxId = `${research}-theme${themeNum}-answer${answerNum}`;
+                html += `
+                    <div class="option">
+                        <input type="checkbox" id="${checkboxId}" name="${research}-theme${themeNum}" value="${answerNum}">
+                        <label for="${checkboxId}">${answerNum}. ${answer}</label>
+                    </div>`;
+            });
+
+            html += `</div>
+                <div class="selected-count" id="count-${research}-theme${themeNum}">Обрано: 0</div>
+            </div>`;
+
+            return html;
+        }
+
+        function handleCheckboxChange(e) {
+            const checkbox = e.target;
+            const themeId = checkbox.name;
+            const research = themeId.split('-')[0];
+            const themeNum = themeId.split('theme')[1];
+
+            const checkboxes = document.querySelectorAll(`input[name="${themeId}"]:checked`);
+            const count = checkboxes.length;
+            const allCheckboxes = document.querySelectorAll(`input[name="${themeId}"]`);
+
+            // Limit to 3 selections
+            if (count > 3) {
+                checkbox.checked = false;
+                showError('Максимум 3 варіанти на одну тему!');
+            } else {
+                // Disable unchecked if 3 already selected
+                allCheckboxes.forEach(cb => {
+                    if (!cb.checked && count === 3) {
+                        cb.disabled = true;
+                    } else {
+                        cb.disabled = false;
+                    }
+                });
+                clearError();
+            }
+
+            document.getElementById(`count-${themeId}`).textContent = `Обрано: ${Math.min(count, 3)}`;
+        }
+
+        function showError(msg) {
+            const errorDiv = document.getElementById('error-message');
+            errorDiv.textContent = msg;
+            errorDiv.classList.add('show');
+        }
+
+        function clearError() {
+            document.getElementById('error-message').classList.remove('show');
+        }
+
+        document.getElementById('pdo-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            submitForm();
+        });
+
+        function submitForm() {
+            const name = document.getElementById('name').value.trim();
+            if (!name) {
+                showError('Будь ласка, введіть ПІБ');
+                return;
+            }
+
+            const research1 = {};
+            const research2 = {};
+
+            // Collect Research 1
+            for (let themeNum = 1; themeNum <= 25; themeNum++) {
+                const checkboxes = document.querySelectorAll(`input[name="research-1-theme${themeNum}"]:checked`);
+                if (checkboxes.length > 0) {
+                    research1[themeNum] = Array.from(checkboxes).map(cb => cb.value);
+                }
+            }
+
+            // Collect Research 2
+            for (let themeNum = 1; themeNum <= 25; themeNum++) {
+                const checkboxes = document.querySelectorAll(`input[name="research-2-theme${themeNum}"]:checked`);
+                if (checkboxes.length > 0) {
+                    research2[themeNum] = Array.from(checkboxes).map(cb => cb.value);
+                }
+            }
+
+            // Format output
+            let output = `Клієнт: ${name}\n\n`;
+            output += `=== ДОСЛІДЖЕННЯ 1 (Найбільш притаманні) ===\n`;
+            for (let i = 1; i <= 25; i++) {
+                if (research1[i]) {
+                    const themeName = questionsData[i].name;
+                    output += `Тема ${i}. ${themeName}: ${research1[i].join(', ')}\n`;
+                }
+            }
+
+            output += `\n=== ДОСЛІДЖЕННЯ 2 (Найменш притаманні) ===\n`;
+            for (let i = 1; i <= 25; i++) {
+                if (research2[i]) {
+                    const themeName = questionsData[i].name;
+                    output += `Тема ${i}. ${themeName}: ${research2[i].join(', ')}\n`;
+                }
+            }
+
+            // Show result
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = output;
+            resultDiv.classList.add('show');
+
+            // Log to console
+            console.log('Дані для обробки:', { name, research1, research2 });
+        }
+    </script>
+</body>
+</html>
