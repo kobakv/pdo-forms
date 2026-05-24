@@ -315,7 +315,12 @@
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+    const SUPABASE_URL = 'https://wxomuxpsedqxdoeqzika.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind4b211eHBzZWRxeGRvZXF6aWthIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk2NDUyMTgsImV4cCI6MjA5NTIyMTIxOH0.dUp8VVrwH3r0qVgBa8Lq6c-kT73cWjRpxIlz_Nxg11g';
+    const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
     let questionsData = {};
 
     fetch('pdo_questions.json')
@@ -370,7 +375,7 @@
         document.getElementById('error-message').classList.remove('show');
     }
 
-    document.getElementById('pdo-form').addEventListener('submit', e => {
+    document.getElementById('pdo-form').addEventListener('submit', async e => {
         e.preventDefault();
 
         const name = document.getElementById('name').value.trim();
@@ -384,7 +389,6 @@
         if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError("Введіть коректний email."); return; }
         if (!dob) { showError("Введіть дату народження."); return; }
 
-        // Validate all 25 themes filled
         const empty = [];
         for (let n = 1; n <= 25; n++) {
             const checked = document.querySelectorAll(`input[name="theme${n}"]:checked`);
@@ -408,18 +412,41 @@
             parts.push(Array.from(checked).map(cb => cb.value).join(','));
         }
 
+        document.getElementById('btn-submit').disabled = true;
+        document.getElementById('btn-reset').disabled = true;
+
+        const { data, error } = await db
+            .from('pdo_results')
+            .insert({
+                name, age: parseInt(age), gender, email, dob,
+                d1_answers: parts.join('|'),
+                status: 'д1'
+            })
+            .select('id')
+            .single();
+
+        if (error) {
+            showError('Помилка збереження: ' + error.message);
+            document.getElementById('btn-submit').disabled = false;
+            document.getElementById('btn-reset').disabled = false;
+            return;
+        }
+
+        const form2url = `https://kobakv.github.io/pdo-forms/form2.html?id=${data.id}`;
         const output =
 `Ім'я: ${name}
 Вік: ${age}
 Стать: ${gender}
 
-Д1: ${parts.join('|')}`;
+Д1: ${parts.join('|')}
+
+✅ Збережено в базу даних.
+Посилання для Дослідження 2 (надіслати через 2 дні):
+${form2url}`;
 
         document.getElementById('result').textContent = output;
         document.getElementById('result').classList.add('show');
         document.getElementById('success-box').classList.add('show');
-        document.getElementById('btn-submit').disabled = true;
-        document.getElementById('btn-reset').disabled = true;
         clearError();
     });
 
