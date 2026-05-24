@@ -268,14 +268,31 @@
                     <label for="name">ПІБ <span>*</span></label>
                     <input type="text" id="name" required placeholder="Іван Петренко Миколайович">
                 </div>
+                <div class="form-group" style="max-width:120px;">
+                    <label for="age">Вік (років) <span>*</span></label>
+                    <input type="number" id="age" required min="10" max="99" placeholder="25">
+                </div>
                 <div class="form-group">
                     <label for="email">Email <span>*</span></label>
                     <input type="email" id="email" required placeholder="example@email.com">
                 </div>
             </div>
-            <div class="form-group" style="max-width: 300px;">
-                <label for="dob">Дата народження <span>*</span></label>
-                <input type="date" id="dob" required>
+            <div class="fields-row">
+                <div class="form-group" style="max-width: 300px;">
+                    <label for="dob">Дата народження <span>*</span></label>
+                    <input type="date" id="dob" required>
+                </div>
+                <div class="form-group">
+                    <label>Стать <span>*</span></label>
+                    <div style="display:flex;gap:24px;margin-top:8px;">
+                        <label style="cursor:pointer;font-weight:500;">
+                            <input type="radio" name="gender" value="male" required checked> Чоловік
+                        </label>
+                        <label style="cursor:pointer;font-weight:500;">
+                            <input type="radio" name="gender" value="female"> Жінка
+                        </label>
+                    </div>
+                </div>
             </div>
 
             <div class="error" id="error-message"></div>
@@ -357,10 +374,13 @@
         e.preventDefault();
 
         const name = document.getElementById('name').value.trim();
+        const age = document.getElementById('age').value.trim();
         const email = document.getElementById('email').value.trim();
         const dob = document.getElementById('dob').value;
+        const gender = document.querySelector('input[name="gender"]:checked').value;
 
         if (!name) { showError("Будь ласка, введіть ПІБ."); return; }
+        if (!age || isNaN(age)) { showError("Введіть вік."); return; }
         if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError("Введіть коректний email."); return; }
         if (!dob) { showError("Введіть дату народження."); return; }
 
@@ -382,15 +402,18 @@
             return;
         }
 
-        const answers = {};
+        const parts = [];
         for (let n = 1; n <= 25; n++) {
-            answers[n] = Array.from(document.querySelectorAll(`input[name="theme${n}"]:checked`)).map(cb => cb.value);
+            const checked = document.querySelectorAll(`input[name="theme${n}"]:checked`);
+            parts.push(Array.from(checked).map(cb => cb.value).join(','));
         }
 
-        let output = `=== ДОСЛІДЖЕННЯ 1 ===\nКлієнт: ${name}\nEmail: ${email}\nДата народження: ${dob}\n\n`;
-        for (let i = 1; i <= 25; i++) {
-            output += `Тема ${i}. ${questionsData[i].name}: ${answers[i].join(', ')}\n`;
-        }
+        const output =
+`Ім'я: ${name}
+Вік: ${age}
+Стать: ${gender}
+
+Д1: ${parts.join('|')}`;
 
         document.getElementById('result').textContent = output;
         document.getElementById('result').classList.add('show');
