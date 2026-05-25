@@ -277,11 +277,6 @@
                     <input type="email" id="email" required placeholder="example@email.com">
                 </div>
             </div>
-            <div class="form-group" style="max-width: 300px;">
-                <label for="dob">Дата народження <span>*</span></label>
-                <input type="date" id="dob" required>
-            </div>
-
             <div class="error" id="error-message"></div>
 
             <h2 class="section-title" style="margin-bottom: 25px; margin-top: 10px;">Теми</h2>
@@ -369,12 +364,9 @@
         const name = document.getElementById('name').value.trim();
         const age = document.getElementById('age').value.trim();
         const email = document.getElementById('email').value.trim();
-        const dob = document.getElementById('dob').value;
-
         if (!name) { showError("Будь ласка, введіть ПІБ."); return; }
         if (!age || isNaN(age)) { showError("Введіть вік."); return; }
         if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError("Введіть коректний email."); return; }
-        if (!dob) { showError("Введіть дату народження."); return; }
 
         const empty = [];
         for (let n = 1; n <= 25; n++) {
