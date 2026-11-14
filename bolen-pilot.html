@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Вправа: внутрішні образи (пілот)</title>
+<style>
+:root{--bg:#FDF9F4;--card:#fff;--ink:#3b302b;--mut:#7a6a62;--acc:#BB764F;--soft:#F3E2D4;--ok:#ABA26A;--err:#a8412f}
+@media (prefers-color-scheme:dark){:root{--bg:#1f1a17;--card:#2a2320;--ink:#f1e8e0;--mut:#b5a69c;--soft:#3a2f29}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.5 system-ui,sans-serif}
+main{max-width:640px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:1.4rem;margin:.2em 0 .6em}.card{background:var(--card);border-radius:16px;padding:18px;margin:12px 0;box-shadow:0 1px 4px #0001}
+.mut{color:var(--mut);font-size:.9rem}.help{background:var(--soft);border-radius:12px;padding:12px;font-size:.92rem;margin:12px 0}
+label{display:block;margin:12px 0 4px;font-weight:600}input[type=text],select,textarea{width:100%;font:inherit;padding:10px;border-radius:10px;border:1px solid #0003;background:var(--bg);color:var(--ink)}
+button{font:inherit;border:0;border-radius:12px;padding:12px 16px;background:var(--acc);color:#fff;cursor:pointer}
+button.sec{background:var(--soft);color:var(--ink)}button:disabled{opacity:.5}
+.scale{display:grid;gap:8px;margin-top:14px}.scale button{background:var(--soft);color:var(--ink);text-align:left;border:2px solid transparent}
+.scale button.on{border-color:var(--acc);background:var(--card)}
+.bar{height:6px;background:var(--soft);border-radius:4px;margin:8px 0}.bar i{display:block;height:100%;background:var(--acc);border-radius:4px}
+.row{display:flex;gap:8px;justify-content:space-between;margin-top:14px;flex-wrap:wrap}
+.err{color:var(--err);margin-top:8px}.chk{display:flex;gap:10px;align-items:flex-start;margin:10px 0}.chk input{margin-top:6px;width:20px;height:20px}
+.hidden{display:none}
+</style>
+</head>
+<body><main>
+<div id="app"></div>
+<p class="mut">Пілот вправи для самопізнання. Не діагностика. Відповіді анонімні.</p>
+</main>
+<script>
+const ITEMS = {"women": ["Я охоче спершу придивляюся, а вже потім визначаюся.", "Мені комфортніше жити без зобов'язань перед партнером чи партнеркою.", "Сильне захоплення людиною чи ідеєю наповнює мене енергією.", "Спільні плани на роки вперед зміцнюють для мене стосунки.", "Я не люблю змінювати свої звички та погляди.", "Мені легко знайти час для того, кому потрібна допомога.", "Я вмію сказати «ні», коли чужі очікування суперечать моїм цілям.", "Я охоче беру на себе піклування про тих, хто поруч.", "Яскраві емоції в стосунках мене радше втомлюють.", "Я ціную взаємні зобов'язання в парі.", "Задоволення заради задоволення я собі дозволяю рідко.", "Тиха година наодинці з собою для мене справжній відпочинок.", "Мені важливіше займатися власними справами, ніж чужими потребами.", "Довготривала відданість у близьких стосунках -- одна з моїх цінностей.", "Мені важливо, щоб у стосунках була ніжність.", "Мені не потрібне чиєсь схвалення, щоб діяти за власним планом.", "Мені приємно, коли людям поруч зі мною тепло й цікаво.", "Більшість рішень я ухвалюю за настроєм, без розрахунків.", "Я вмію просто побути поруч із кимось без розмов і порад.", "У конфлікті я намагаюся спершу розібратися у фактах.", "Допомога іншим рідко дає мені відчуття сенсу.", "Своїм часом і справами я розпоряджаюся за власним розсудом.", "У різному товаристві я проявляюся по-різному.", "Складні проблеми мені нудно розбирати.", "Я охоче дбаю про добробут близьких.", "Мені важливо, щоб результат роботи був практичним, а не лише гарним.", "Затишок вдома для мене не має великого значення.", "Я охоче ділюся з партнером чи партнеркою буденними справами.", "Незрозуміле й таємниче мене радше відштовхує.", "Складання плану приносить мені задоволення.", "Важливі рішення про моє життя я охоче довіряю комусь іншому.", "Перед важливим рішенням я зважую кілька варіантів.", "Мені легко зануритися в уяву або мрії.", "Прості щоденні ритуали дають мені відчуття опори.", "Краса речей, місць чи людей помітно впливає на мій настрій.", "Дане слово я за потреби переглядаю, якщо обставини змінилися.", "Я зазвичай помічаю, коли комусь поруч потрібна підтримка.", "Довгі цілі швидко втрачають для мене привабливість.", "Мені легко підхопити чужий настрій.", "Без подій і поспіху мені швидко стає нудно.", "Мене дратує, коли мені розповідають, як саме жити.", "Мені комфортно, коли на мене не звертають особливої уваги."], "men": ["Коли під загрозою щось важливе, я переходжу до дій, а не до роздумів.", "Негода й стихія викликають у мене лише незручність.", "Мені комфортніше із завданням у руках, ніж у світській бесіді.", "Я легко знаходжу підхід до різних людей.", "Я уникаю ролі того, хто ухвалює остаточне рішення в групі.", "Музика й рух здатні повністю захопити мене.", "Публічне визнання мене мало цікавить.", "Коли в групі ніхто не керує, я зазвичай беру керування на себе.", "Мені легко приймати людей, які суттєво відрізняються від мене.", "Коли справа не виходить, я швидко її полишаю.", "Мені важко приховувати, що я відчуваю.", "Мені природно відповідати за результат спільної справи.", "Мені подобається пояснювати складне зрозуміло.", "Мої сни та уява мають для мене велике значення.", "Гучні свята й спільні гуляння мене втомлюють.", "Над однією справою я можу працювати годинами, не помічаючи часу.", "У змаганні я працюю краще, ніж без нього.", "Майструвати чи ремонтувати мені нудно.", "Мої емоції бувають сильними й приходять хвилями.", "Мені подобається знайомити людей між собою.", "Чіткі цілі та критерії успіху здаються мені зайвими.", "Мені швидко стає нудно, коли довго нічого не змінюється.", "Фізичні навантаження мене радше стомлюють, ніж розряджають.", "Найкраще я збираю думки на самоті.", "У розмовах я охочіше тримаюся ідей і фактів, ніж особистих переживань.", "Я погано почуваюся, коли обставини часто змінюються.", "Я відчуваю в собі багато енергії.", "Я волію робити одну справу за раз.", "Мені важливо, щоб правила в команді чи родині були однакові для всіх.", "Я ціную сильні емоції, навіть коли вони непрості.", "Я можу ухвалити непопулярне рішення, якщо вважаю його правильним.", "Довге перебування на самоті мені не подобається.", "Я люблю нові місця, маршрути й знайомства.", "Про своє внутрішнє життя я говорю лише з небагатьма.", "Я легко наважуюся на ризик заради цікавої мети.", "Мені однаково, чи впливає моя думка на спільні рішення.", "Смачна їжа й тепла вода -- для мене справжні радощі.", "Глибинні мотиви й символи мене мало цікавлять.", "Я легко відпускаю контроль, коли мені добре.", "Мені важливо мати місце, куди можна повністю відійти від людей.", "Я зазвичай уникаю конфліктів.", "Власна майстерня чи робочий куток дають мені відчуття свого місця.", "Відчуттям у тілі я часто довіряю більше, ніж доводам.", "Чіткі правила й рамки дають мені спокій.", "Я віддаю перевагу чітким цілям і зрозумілим критеріям успіху.", "Мені важливо досягти високої якості навіть у деталях, яких ніхто не побачить.", "Я зазвичай продумую, яке враження справлю.", "Мої емоції зазвичай тихі й рівні."]};
+const SB_URL = "https://lkrubfvwrodilfvgoowj.supabase.co", SB_KEY = "sb_publishable_sYpMRCQvadzXuHWXTy9BhQ_z3KBxGm2";
+const ANCH = ["Зовсім не про мене","Скоріше не про мене","Частково про мене, частково ні","Скоріше про мене","Дуже про мене"];
+const HELP = "Якщо вам зараз дуже важко або виникають думки заподіяти собі шкоду, зверніться по допомогу: 112 (екстрена допомога), Lifeline Ukraine 7333, лінія МОМ 0 800 211 444. Ця вправа не виявляє кризових станів і не замінює розмову зі спеціалістом.";
+const S = {step:"start", version:"", code:"", age:"", i:0, ans:{}, clarity:"", comment:"", err:"", busy:false};
+const $ = document.getElementById("app");
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function save(){try{localStorage.setItem("bolen-pilot",JSON.stringify({version:S.version,code:S.code,age:S.age,i:S.i,ans:S.ans}))}catch(e){}}
+function load(){try{const d=JSON.parse(localStorage.getItem("bolen-pilot")||"null");if(d&&d.version&&d.code&&Object.keys(d.ans||{}).length&&d.i>0){return d}}catch(e){}return null}
+function render(){
+  if(S.step==="start") return renderStart();
+  if(S.step==="q") return renderQ();
+  if(S.step==="end") return renderEnd();
+  if(S.step==="done") return renderDone();
+}
+function renderStart(){
+  const resume = load();
+  $.innerHTML = `<h1>Вправа «Внутрішні образи»</h1>
+  <div class="card"><p>Ми перевіряємо, чи зрозумілі формулювання вправи для самопізнання за ідеями Дж. Ш. Болен. Заповнення займає 10–15 хвилин. Відповіді анонімні: імені, пошти й телефону ми не збираємо.</p>
+  <div class="help">Це вправа для самопізнання і рефлексії. Вона не є діагностикою, психологічним висновком чи оцінкою особистості. Твердження складено нами й ще не перевірено на великій вибірці. Образи з міфології — метафори, а не типи людей.</div>
+  <div class="help">${esc(HELP)}</div>
+  ${resume?`<div class="help">Є незавершене проходження (${Object.keys(resume.ans).length} відповідей). <button class="sec" id="resume">Продовжити</button></div>`:""}
+  <div class="chk"><input type="checkbox" id="c18"><label for="c18" style="margin:0;font-weight:400">Мені є 18 років.</label></div>
+  <div class="chk"><input type="checkbox" id="cons"><label for="cons" style="margin:0;font-weight:400">Я прочитав(ла) інформацію вище, участь добровільна, можу припинити будь-коли. Погоджуюсь на анонімне використання моїх відповідей для оцінки вправи. Для видалення своїх відповідей назву автору свій код.</label></div>
+  <label for="ver">Яку версію хочете пройти?</label>
+  <select id="ver"><option value="">— оберіть —</option><option value="women">Жіноча (42 твердження)</option><option value="men">Чоловіча (48 тверджень)</option></select>
+  <label for="age">Вік</label>
+  <select id="age"><option value="">— оберіть —</option>${["18-24","25-34","35-44","45-54","55+"].map(a=>`<option>${a}</option>`).join("")}</select>
+  <label for="code">Ваш код (потрібен для повторного проходження через 2 тижні і для видалення)</label>
+  <input type="text" id="code" maxlength="16" placeholder="напр. 4 літери + день місяця, як вигадаєте" autocomplete="off">
+  <p class="mut">Придумайте код самі. Не використовуйте ім'я, телефон чи пошту. Збережіть код.</p>
+  <label for="rnd">Це проходження</label>
+  <select id="rnd"><option value="1">Перше</option><option value="2">Повторне (через 2 тижні)</option></select>
+  <div class="err" id="err">${esc(S.err)}</div>
+  <div class="row"><button id="go">Почати</button></div></div>`;
+  document.getElementById("go").onclick=()=>{
+    const code=document.getElementById("code").value.trim();
+    const v=document.getElementById("ver").value, a=document.getElementById("age").value;
+    if(!document.getElementById("c18").checked||!document.getElementById("cons").checked) return err("Потрібно підтвердити вік 18+ і згоду.");
+    if(!v) return err("Оберіть версію."); if(!a) return err("Оберіть вік."); if(code.length<4||/[@\s]/.test(code)) return err("Код: щонайменше 4 символи, без пробілів і @.");
+    S.version=v;S.age=a;S.code=code;S.round=+document.getElementById("rnd").value;S.i=0;S.ans={};S.err="";S.step="q";save();render()};
+  const r=document.getElementById("resume"); if(r) r.onclick=()=>{Object.assign(S,resume,{round:1,step:"q"});render()};
+}
+function err(m){S.err=m;document.getElementById("err").textContent=m}
+function renderQ(){
+  const list=ITEMS[S.version],n=list.length,i=S.i,cur=S.ans[i+1];
+  $.innerHTML=`<div class="mut">${i+1} з ${n}</div><div class="bar"><i style="width:${(i/n*100).toFixed(0)}%"></i></div>
+  <div class="card"><p style="font-size:1.1rem;margin-top:0">${esc(list[i])}</p>
+  <div class="mut">Наскільки це про вас останнім часом (приблизно за останній рік)?</div>
+  <div class="scale">${ANCH.map((t,k)=>`<button data-v="${k+1}" class="${cur===k+1?"on":""}">${k+1} — ${esc(t)}</button>`).join("")}
+  <button data-v="0" class="${cur===0?"on":""}" style="background:transparent;border:1px dashed var(--mut)">Пропустити</button></div>
+  <div class="row"><button class="sec" id="back" ${i===0?"disabled":""}>Назад</button><span class="mut">Правильних відповідей нема. Перша відповідь зазвичай найточніша.</span></div></div>
+  <div class="mut">${esc(HELP)}</div>`;
+  $.querySelectorAll(".scale button").forEach(b=>b.onclick=()=>{S.ans[i+1]=+b.dataset.v;save();S.i++;if(S.i>=n){S.step="end"}render();window.scrollTo(0,0)});
+  document.getElementById("back").onclick=()=>{S.i=Math.max(0,S.i-1);render()};
+}
+function renderEnd(){
+  $.innerHTML=`<h1>Майже готово</h1><div class="card">
+  <label for="cl">Наскільки твердження були зрозумілі? (1 — зовсім ні, 5 — повністю)</label>
+  <select id="cl"><option value="">— оберіть —</option>${[1,2,3,4,5].map(x=>`<option>${x}</option>`).join("")}</select>
+  <label for="cm">Які твердження були незрозумілі або незручні? (за номером і словами, необов'язково)</label>
+  <textarea id="cm" rows="4" maxlength="2000"></textarea>
+  <div class="err" id="err">${esc(S.err)}</div>
+  <div class="row"><button class="sec" id="back">Назад</button><button id="send" ${S.busy?"disabled":""}>Надіслати</button></div></div>
+  <div class="mut">${esc(HELP)}</div>`;
+  document.getElementById("back").onclick=()=>{S.step="q";S.i=ITEMS[S.version].length-1;render()};
+  document.getElementById("send").onclick=submit;
+}
+async function submit(){
+  S.clarity=document.getElementById("cl").value; S.comment=document.getElementById("cm").value.trim();
+  const n=ITEMS[S.version].length, answers={};
+  for(let k=1;k<=n;k++){const v=S.ans[k];answers["q"+k]=(v>=1&&v<=5)?v:null}
+  const skipped=Object.values(answers).filter(v=>v===null).length;
+  if(skipped>n/3) return err("Пропущено забагато тверджень ("+skipped+"). Поверніться і дайте більше відповідей.");
+  S.busy=true;document.getElementById("send").disabled=true;
+  try{
+    const r=await fetch(SB_URL+"/rest/v1/pilot_responses",{method:"POST",headers:{"apikey":SB_KEY,"Authorization":"Bearer "+SB_KEY,"Content-Type":"application/json","Prefer":"return=minimal"},
+      body:JSON.stringify({version:S.version,round:S.round||1,code:S.code,age_range:S.age,consent:true,answers,clarity:S.clarity?+S.clarity:null,comment:S.comment||null})});
+    if(r.status===201){try{localStorage.removeItem("bolen-pilot")}catch(e){}S.step="done";render();return}
+    if(r.status===409) {S.busy=false;return err("Для цього коду і цього раунду відповіді вже є. Якщо це повторне проходження — оберіть «Повторне»; інакше змініть код.")}
+    S.busy=false;err("Не вдалося надіслати (код "+r.status+"). Спробуйте ще раз пізніше, відповіді збережено на цьому пристрої.");
+  }catch(e){S.busy=false;err("Немає зв'язку. Відповіді збережено на цьому пристрої, спробуйте пізніше.")}
+}
+function renderDone(){
+  $.innerHTML=`<h1>Дякуємо!</h1><div class="card"><p>Відповіді надіслано. Збережіть свій код: <b>${esc(S.code)}</b>. Через 2 тижні буде дуже допомагати повторне проходження з тим самим кодом.</p>
+  <div class="help">${esc(HELP)}</div></div>`;
+}
+render();
+</script></body></html>
